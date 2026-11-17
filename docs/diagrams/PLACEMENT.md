@@ -1,18 +1,17 @@
 # Where appkitc sits
 
-Shows what `appkitc` imports and who runs it. It runs only on the developer's machine, started by `webtyp dev`; no production binary contains it. Verified by `TestFixtureApp_MainsDoNotImportTheGenerator` in [tests/fixtureapp_test.go](../../tests/fixtureapp_test.go).
+Shows what `appkitc` imports and who uses it. It runs only on the developer's machine, inside the `webtyp` program; no app lists it and no production binary contains it. Verified by `TestFixtureApp_MainsDoNotImportTheGenerator` in [tests/fixtureapp_test.go](../../tests/fixtureapp_test.go).
 
 ```mermaid
 flowchart TD
-  A["app go.mod<br/>tool appkitc"] --> B["go tool appkitc"]
-  C["webtyp dev<br/>(repo app, via server)"] --> B
-  B --> D["appkitc"]
-  D --> E["webtyp.com/server<br/>project detection, MainConfig"]
-  D --> F["appkit, layout, devtools, migrate, ddl<br/>the libraries the templates call"]
-  D --> G["command, router/routescan"]
-  H["server binary, browser wasm<br/>migrate binary"] -. never imports .-> D
+  A["webtyp program<br/>(repo app)"] --> B["appkitc"]
+  A --> C["server<br/>SetMainGenerator"]
+  B --> D["webtyp.com/server<br/>project detection, MainConfig"]
+  B --> E["appkit, layout, devtools, migrate, ddl<br/>the libraries the templates call"]
+  B --> F["command, router/routescan"]
+  G["app go.mod, server binary,<br/>browser wasm, migrate binary"] -. never lists or imports .-> B
 ```
 
-1. The app's `go.mod` pins `appkitc`; `webtyp dev` (through `server.RunGenerator`) runs it with `go tool`.
+1. `app` imports `appkitc` and connects its `GenerateMain` to the server handler.
 2. `appkitc` imports `server` for what the handler and the generator share, and the libraries its templates call, so a template that does not compile fails its own tests.
-3. The generated binaries of the app never import `appkitc`.
+3. The apps the generator writes for never list `appkitc`.

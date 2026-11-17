@@ -17,8 +17,6 @@ const (
 	filePerm os.FileMode = 0o644
 
 	goCommand = "go"
-	goMod     = "mod"
-	goTidy    = "tidy"
 )
 
 // GenerateMain writes the server entry point for the project at rootDir and
@@ -102,18 +100,34 @@ func GenerateMain(rootDir, modulePath string, cfg server.MainConfig) (string, er
 	}
 
 	if isApp && !sameFiles(before, readFiles(appFiles)) {
-		if err := tidyModule(rootDir); err != nil {
+		if err := UpgradeGeneratedLibraries(rootDir); err != nil {
 			return "", err
 		}
 	}
 	return absPath, nil
 }
 
-// tidyModule asks Go to list in the app's go.mod the modules the generated files import and it does not require yet.
-// The app already pins appkitc, and appkitc requires the libraries its templates call, so no library is upgraded here.
-func tidyModule(rootDir string) error {
-	if out, err := command.RunInDir(rootDir, goCommand, goMod, goTidy); err != nil {
-		return fmt.Errorf("the generated files were written, but the app's go.mod could not be completed (nothing of yours was changed); run `go mod tidy` in the app and read its error: %w: %s", err, out)
+// generatedLibraries are the libraries the templates call. When GenerateMain writes new content into an app's generated
+// files it runs `go get <each>@latest` in the app: a template is only published after the library API it uses, so
+// @latest always has it, and the app never keeps a go.mod older than its generated code.
+var generatedLibraries = []string{"webtyp.com/appkit", "webtyp.com/ddl", "webtyp.com/devtools", "webtyp.com/layout", "webtyp.com/migrate"}
+
+const (
+	goGet         = "get"
+	versionLatest = "@latest"
+)
+
+// UpgradeGeneratedLibraries runs `go get <each generated library>@latest` in an appkit app: GenerateMain calls it when it
+// writes new content, and webtyp dev's «Update libraries» when the app's migration does not compile.
+//
+// Example: if err := appkitc.UpgradeGeneratedLibraries(rootDir); err != nil { log(err) }
+func UpgradeGeneratedLibraries(rootDir string) error {
+	args := []string{goGet}
+	for _, lib := range generatedLibraries {
+		args = append(args, lib+versionLatest)
+	}
+	if out, err := command.RunInDir(rootDir, goCommand, args...); err != nil {
+		return fmt.Errorf("the generated code needs newer libraries: %w: %s", err, out)
 	}
 	return nil
 }

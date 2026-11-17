@@ -506,16 +506,16 @@ func fakeGo(t *testing.T) *[]string {
 	return &calls
 }
 
-// TestMainGen_CompletesGoModWhenOutputChanges: when GenerateMain writes new content into an app's generated
-// files it asks Go to list the modules they import, once; a generation that changes nothing runs no go command.
-func TestMainGen_CompletesGoModWhenOutputChanges(t *testing.T) {
+// TestMainGen_UpgradesLibrariesWhenOutputChanges: when GenerateMain writes new content into an app's generated
+// files it upgrades the libraries the templates call, once; a generation that changes nothing runs no go command.
+func TestMainGen_UpgradesLibrariesWhenOutputChanges(t *testing.T) {
 	calls := fakeGo(t)
 	root := t.TempDir()
 	const modulePath = "example.com/app"
 	writeModule(t, root, modulePath)
 	appSrc := "package config\n\nimport \"webtyp.com/appkit\"\n\nvar App = appkit.App{}\n"
 	writeConfigApp(t, root, appSrc)
-	const want = "mod tidy"
+	const want = "get webtyp.com/appkit@latest webtyp.com/ddl@latest webtyp.com/devtools@latest webtyp.com/layout@latest webtyp.com/migrate@latest"
 	generate := func() {
 		t.Helper()
 		if _, err := appkitc.GenerateMain(root, modulePath, server.MainConfig{Port: "8080"}); err != nil {

@@ -13,7 +13,7 @@
 | [TestGenerateMain_ParsesAndImportsRoutes](../tests/maingen_test.go) | GenerateMain_ParsesAndImportsRoutes |
 | [TestGenerateMain_PlainHTTPAndNoCARoute](../tests/maingen_test.go) | GenerateMain_PlainHTTPAndNoCARoute |
 | [TestGenerateMain_WritesWebServerMainGo](../tests/maingen_test.go) | GenerateMain_WritesWebServerMainGo |
-| [TestMainGen_CompletesGoModWhenOutputChanges](../tests/maingen_test.go) | MainGen_CompletesGoModWhenOutputChanges |
+| [TestMainGen_UpgradesLibrariesWhenOutputChanges](../tests/maingen_test.go) | MainGen_UpgradesLibrariesWhenOutputChanges |
 | [TestMainGen_RemovedWrittenOnce](../tests/maingen_test.go) | MainGen_RemovedWrittenOnce |
 | [TestMainGen_SignInMigratesAccessFirst](../tests/maingen_test.go) | MainGen_SignInMigratesAccessFirst |
 | [TestMaingen_DeletesOldMigrationsFile](../tests/maingen_test.go) | Maingen_DeletesOldMigrationsFile |
