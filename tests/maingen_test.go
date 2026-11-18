@@ -580,6 +580,9 @@ var App = appkit.App{
 	if access == -1 || mod1 == -1 || access > mod1 {
 		t.Fatalf("access must be migrated before the app's modules:\n%s", got)
 	}
+	if !strings.Contains(got, `{Name: "externalcalls", Run: externalcallsmigrate.Migrate}`) {
+		t.Fatalf("the external calls queue table must always be migrated:\n%s", got)
+	}
 }
 
 func TestMaingen_RefusesAppWithoutServicesPackage(t *testing.T) {

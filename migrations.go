@@ -28,6 +28,13 @@ const (
 	signInMigrationPath = "webtyp.com/access/migrate"
 )
 
+// Every app gets the queue of external calls: appkit always builds it, and starts its executor when a module declares calls, so the app
+// lists no module for it and cannot forget the table (without it the executor fails with: relation "queued_call" does not exist).
+const (
+	callQueueMigrationName = "externalcalls"
+	callQueueMigrationPath = "webtyp.com/externalcalls/migrate"
+)
+
 func generateMigrationsFile(rootDir string) error {
 	configDir := filepath.Join(rootDir, server.ConfigDir)
 	entries, err := os.ReadDir(configDir)
@@ -119,6 +126,8 @@ func generateMigrationsFile(rootDir string) error {
 		steps = append(steps, migrationStepData{Name: signInMigrationName, Alias: "accessmigrate", ImportPath: signInMigrationPath})
 		usedAliases["accessmigrate"] = true
 	}
+	steps = append(steps, migrationStepData{Name: callQueueMigrationName, Alias: "externalcallsmigrate", ImportPath: callQueueMigrationPath})
+	usedAliases["externalcallsmigrate"] = true
 
 	for _, ident := range moduleIdents {
 		impPath, ok := identToImport[ident]

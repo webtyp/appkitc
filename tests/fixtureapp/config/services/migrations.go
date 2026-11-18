@@ -10,6 +10,7 @@ package services
 import (
 	"webtyp.com/ddl"
 	accessmigrate "webtyp.com/access/migrate"
+	externalcallsmigrate "webtyp.com/externalcalls/migrate"
 )
 
 // Schema is the app's database: every module's migration in App.Modules order, and the columns its models
@@ -17,6 +18,7 @@ import (
 var Schema = ddl.Schema{
 	Steps: []ddl.Step{
 		{Name: "access", Run: accessmigrate.Migrate},
+		{Name: "externalcalls", Run: externalcallsmigrate.Migrate},
 	},
 	Removed: Removed,
 }
