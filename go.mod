@@ -7,10 +7,11 @@ require (
 	webtyp.com/appkit v0.2.38
 	webtyp.com/command v0.0.4
 	webtyp.com/country v0.0.2
-	webtyp.com/ddl v0.0.58
+	webtyp.com/ddl v0.0.59
 	webtyp.com/devtools v0.0.41
 	webtyp.com/env v0.1.3
 	webtyp.com/events v0.1.15
+	webtyp.com/externalcalls v0.2.0
 	webtyp.com/fmt v1.0.3
 	webtyp.com/layout v0.3.130
 	webtyp.com/mcp v0.3.36
@@ -62,7 +63,6 @@ require (
 	webtyp.com/dom v0.13.29 // indirect
 	webtyp.com/erd v0.0.16 // indirect
 	webtyp.com/escape v0.1.0 // indirect
-	webtyp.com/externalcalls v0.2.0 // indirect
 	webtyp.com/fetch v0.1.30 // indirect
 	webtyp.com/filepath v0.1.3 // indirect
 	webtyp.com/filetype v0.1.1 // indirect
