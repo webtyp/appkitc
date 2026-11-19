@@ -18,9 +18,9 @@ require (
 	webtyp.com/mcp v0.3.36
 	webtyp.com/migrate v0.1.9
 	webtyp.com/model v0.2.26
-	webtyp.com/router v0.5.7
+	webtyp.com/router v0.5.8
 	webtyp.com/rpc v0.2.30
-	webtyp.com/server v0.2.132
+	webtyp.com/server v0.2.137
 	webtyp.com/sqlite v0.3.35
 	webtyp.com/unixid v0.3.1
 )
@@ -68,7 +68,7 @@ require (
 	webtyp.com/filetype v0.1.1 // indirect
 	webtyp.com/font v0.0.5 // indirect
 	webtyp.com/form v0.4.68 // indirect
-	webtyp.com/gobuild v0.0.28 // indirect
+	webtyp.com/gobuild v0.0.29 // indirect
 	webtyp.com/gorun v0.0.29 // indirect
 	webtyp.com/html v0.0.33 // indirect
 	webtyp.com/icons v0.0.42 // indirect
