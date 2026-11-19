@@ -14,7 +14,7 @@ require (
 	webtyp.com/events v0.1.15
 	webtyp.com/externalcalls v0.2.0
 	webtyp.com/fmt v1.0.3
-	webtyp.com/layout v0.3.132
+	webtyp.com/layout v0.3.134
 	webtyp.com/mcp v0.3.36
 	webtyp.com/migrate v0.1.9
 	webtyp.com/model v0.2.26
@@ -53,14 +53,14 @@ require (
 	webtyp.com/base64 v0.0.6 // indirect
 	webtyp.com/calendar v0.1.0 // indirect
 	webtyp.com/color v0.1.2 // indirect
-	webtyp.com/components v0.8.75 // indirect
+	webtyp.com/components v0.8.76 // indirect
 	webtyp.com/context v0.0.23 // indirect
 	webtyp.com/crud v0.0.19 // indirect
 	webtyp.com/crypto v0.0.30 // indirect
 	webtyp.com/css v0.4.31 // indirect
 	webtyp.com/dbus v0.1.1 // indirect
 	webtyp.com/definitioncheck v0.0.3 // indirect
-	webtyp.com/dom v0.13.31 // indirect
+	webtyp.com/dom v0.13.32 // indirect
 	webtyp.com/erd v0.0.16 // indirect
 	webtyp.com/escape v0.1.0 // indirect
 	webtyp.com/fetch v0.1.33 // indirect
@@ -75,7 +75,7 @@ require (
 	webtyp.com/input v0.2.5 // indirect
 	webtyp.com/json v0.5.40 // indirect
 	webtyp.com/keyring v0.2.9 // indirect
-	webtyp.com/lang v0.1.19 // indirect
+	webtyp.com/lang v0.1.20 // indirect
 	webtyp.com/msgtype v0.1.2 // indirect
 	webtyp.com/notify v0.2.18 // indirect
 	webtyp.com/orm v0.12.42 // indirect
@@ -84,7 +84,7 @@ require (
 	webtyp.com/securityevent v0.0.2 // indirect
 	webtyp.com/sqlt v0.0.21 // indirect
 	webtyp.com/storage v0.2.8 // indirect
-	webtyp.com/svg v0.3.33 // indirect
+	webtyp.com/svg v0.3.43 // indirect
 	webtyp.com/time v0.6.7 // indirect
 	webtyp.com/user v0.3.14 // indirect
 	webtyp.com/view v0.6.91 // indirect
