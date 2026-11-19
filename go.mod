@@ -75,7 +75,7 @@ require (
 	webtyp.com/input v0.2.5 // indirect
 	webtyp.com/json v0.5.40 // indirect
 	webtyp.com/keyring v0.2.9 // indirect
-	webtyp.com/lang v0.1.20 // indirect
+	webtyp.com/lang v0.1.22 // indirect
 	webtyp.com/msgtype v0.1.2 // indirect
 	webtyp.com/notify v0.2.18 // indirect
 	webtyp.com/orm v0.12.42 // indirect
