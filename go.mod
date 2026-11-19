@@ -79,7 +79,7 @@ require (
 	webtyp.com/msgtype v0.1.2 // indirect
 	webtyp.com/notify v0.2.18 // indirect
 	webtyp.com/orm v0.12.42 // indirect
-	webtyp.com/pwa v0.2.13 // indirect
+	webtyp.com/pwa v0.2.24 // indirect
 	webtyp.com/rbac v0.0.48 // indirect
 	webtyp.com/securityevent v0.0.2 // indirect
 	webtyp.com/sqlt v0.0.21 // indirect
