@@ -9,6 +9,8 @@ package services
 
 import (
 	"webtyp.com/ddl"
+	auth "webtyp.com/auth"
+	config "webtyp.com/appkitc/tests/fixtureapp/config"
 	accessmigrate "webtyp.com/access/migrate"
 	externalcallsmigrate "webtyp.com/externalcalls/migrate"
 )
@@ -18,6 +20,7 @@ import (
 var Schema = ddl.Schema{
 	Steps: []ddl.Step{
 		{Name: "access", Run: accessmigrate.Migrate},
+		{Name: "signin_modes", Run: auth.MigrateModes(config.App.SignIn)},
 		{Name: "externalcalls", Run: externalcallsmigrate.Migrate},
 	},
 	Removed: Removed,

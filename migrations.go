@@ -16,16 +16,34 @@ type migrationStepData struct {
 	Name       string
 	Alias      string
 	ImportPath string
+	Run        string // the step's function as Go code; "" = Alias.Migrate
+}
+
+// importData is one import of the generated file.
+type importData struct {
+	Alias string
+	Path  string
 }
 
 type migrationsTemplateData struct {
-	Steps []migrationStepData
+	Imports []importData
+	Steps   []migrationStepData
 }
 
 // The app that declares App.SignIn gets the sign-in's tables first: appkit builds the sign-in itself, so the app lists no module for it.
 const (
 	signInMigrationName = "access"
 	signInMigrationPath = "webtyp.com/access/migrate"
+)
+
+// The app that declares App.SignIn also gets the tables of the modes it chose (D82): auth.MigrateModes runs Migrate of
+// each mode that keeps tables (passkey), reading the modes from config.App itself.
+const (
+	signInModesMigrationName = "signin_modes"
+	authImportPath           = "webtyp.com/auth"
+	authAlias                = "auth"
+	configAlias              = "config"
+	signInModesRun           = "auth.MigrateModes(config.App.SignIn)"
 )
 
 // Every app gets the queue of external calls: appkit always builds it, and starts its executor when a module declares calls, so the app
@@ -158,9 +176,19 @@ func generateMigrationsFile(rootDir string) error {
 		})
 	}
 
+	data := migrationsTemplateData{Steps: steps}
+	if hasSignIn {
+		modes := migrationStepData{Name: signInModesMigrationName, Run: signInModesRun}
+		data.Steps = append([]migrationStepData{data.Steps[0], modes}, data.Steps[1:]...)
+		data.Imports = append(data.Imports,
+			importData{Alias: authAlias, Path: authImportPath},
+			importData{Alias: configAlias, Path: server.ReadModulePath(rootDir) + "/" + server.ConfigDir})
+	}
+	for _, st := range steps {
+		data.Imports = append(data.Imports, importData{Alias: st.Alias, Path: st.ImportPath})
+	}
 	_ = os.Remove(filepath.Join(rootDir, server.GeneratedMigrateDir, "migrations.go"))
-	_ = os.Remove(filepath.Join(rootDir, server.GeneratedMigrateDir, "migrations.go"))
-	return writeGenerated(filepath.Join(rootDir, server.ConfigDir, dirServices, "migrations.go"), migrationsTemplateText, migrationsTemplateData{Steps: steps})
+	return writeGenerated(filepath.Join(rootDir, server.ConfigDir, dirServices, "migrations.go"), migrationsTemplateText, data)
 }
 
 func packageHasMigrate(rootDir, migratePkgPath, repoPath string) bool {

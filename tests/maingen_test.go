@@ -276,7 +276,7 @@ var App = appkit.App{
 	src, _ := os.ReadFile(got)
 	for _, want := range []string{
 		"backend.Build(config.App, services.Backend, services.Server, env.Get(envDatabase), services.Schema)",
-		"Authn: built.Authn, Authorize: built.Authorize, Policy: built.Policy",
+		"Authn: built.Authn, Authorize: built.Authorize, Report: built.Report, Policy: built.Policy",
 		"built.Mount(srv.Router(), devtools.Server(services.Schema)...)",
 	} {
 		if !strings.Contains(string(src), want) {
@@ -563,7 +563,7 @@ import (
 )
 
 var App = appkit.App{
-	SignIn:  appkit.SignInByTrustedIP,
+	SignIn:  []auth.Mode{passkey.Mode{Origin: "https://app.example.com"}},
 	Modules: []appkit.Module{mod1.Module},
 }
 `
@@ -582,6 +582,10 @@ var App = appkit.App{
 	}
 	if !strings.Contains(got, `{Name: "externalcalls", Run: externalcallsmigrate.Migrate}`) {
 		t.Fatalf("the external calls queue table must always be migrated:\n%s", got)
+	}
+	modes := strings.Index(got, `{Name: "signin_modes", Run: auth.MigrateModes(config.App.SignIn)}`)
+	if modes == -1 || modes < access || modes > mod1 {
+		t.Fatalf("the tables of the chosen sign-in modes must be migrated right after the users' (D82):\n%s", got)
 	}
 }
 

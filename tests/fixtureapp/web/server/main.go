@@ -41,7 +41,7 @@ func main() {
 	}
 	srv := httpd.New(httpd.Config{
 		Port: port, PublicDir: publicDir, Gzip: true, NoCache: env.Arg(argNoCache) == "true", Health: true,
-		Logger: config.App.Log, Authn: built.Authn, Authorize: built.Authorize, Policy: built.Policy,
+		Logger: config.App.Log, Authn: built.Authn, Authorize: built.Authorize, Report: built.Report, Policy: built.Policy,
 	})
 	if err := built.Mount(srv.Router(), devtools.Server(services.Schema)...); err != nil {
 		log.Fatal(err)
