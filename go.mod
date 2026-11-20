@@ -67,7 +67,7 @@ require (
 	webtyp.com/filepath v0.1.3 // indirect
 	webtyp.com/filetype v0.1.1 // indirect
 	webtyp.com/font v0.0.5 // indirect
-	webtyp.com/form v0.4.68 // indirect
+	webtyp.com/form v0.4.72 // indirect
 	webtyp.com/gobuild v0.0.29 // indirect
 	webtyp.com/gorun v0.0.29 // indirect
 	webtyp.com/html v0.0.33 // indirect
