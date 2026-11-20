@@ -20,7 +20,7 @@ require (
 	webtyp.com/model v0.2.26
 	webtyp.com/router v0.5.9
 	webtyp.com/rpc v0.2.30
-	webtyp.com/server v0.2.140
+	webtyp.com/server v0.2.141
 	webtyp.com/sqlite v0.3.35
 	webtyp.com/unixid v0.3.1
 )
