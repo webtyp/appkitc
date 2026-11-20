@@ -14,7 +14,7 @@ require (
 	webtyp.com/events v0.1.15
 	webtyp.com/externalcalls v0.2.0
 	webtyp.com/fmt v1.0.3
-	webtyp.com/layout v0.3.134
+	webtyp.com/layout v0.3.137
 	webtyp.com/mcp v0.3.36
 	webtyp.com/migrate v0.1.9
 	webtyp.com/model v0.2.26
