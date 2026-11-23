@@ -14,10 +14,10 @@ require (
 	webtyp.com/events v0.1.15
 	webtyp.com/externalcalls v0.2.0
 	webtyp.com/fmt v1.0.3
-	webtyp.com/layout v0.3.137
+	webtyp.com/layout v0.3.139
 	webtyp.com/mcp v0.3.36
 	webtyp.com/migrate v0.1.9
-	webtyp.com/model v0.2.26
+	webtyp.com/model v0.2.27
 	webtyp.com/router v0.5.9
 	webtyp.com/rpc v0.2.30
 	webtyp.com/server v0.2.141
@@ -53,7 +53,7 @@ require (
 	webtyp.com/base64 v0.0.6 // indirect
 	webtyp.com/calendar v0.1.0 // indirect
 	webtyp.com/color v0.1.2 // indirect
-	webtyp.com/components v0.8.76 // indirect
+	webtyp.com/components v0.8.79 // indirect
 	webtyp.com/context v0.0.23 // indirect
 	webtyp.com/crud v0.0.19 // indirect
 	webtyp.com/crypto v0.0.30 // indirect
@@ -67,7 +67,7 @@ require (
 	webtyp.com/filepath v0.1.3 // indirect
 	webtyp.com/filetype v0.1.1 // indirect
 	webtyp.com/font v0.0.5 // indirect
-	webtyp.com/form v0.4.72 // indirect
+	webtyp.com/form v0.4.73 // indirect
 	webtyp.com/gobuild v0.0.29 // indirect
 	webtyp.com/gorun v0.0.29 // indirect
 	webtyp.com/html v0.0.33 // indirect
@@ -87,7 +87,7 @@ require (
 	webtyp.com/svg v0.3.43 // indirect
 	webtyp.com/time v0.6.7 // indirect
 	webtyp.com/user v0.3.14 // indirect
-	webtyp.com/view v0.6.91 // indirect
+	webtyp.com/view v0.6.95 // indirect
 	webtyp.com/webauthn v0.1.16 // indirect
 	webtyp.com/widget v0.6.52 // indirect
 )
