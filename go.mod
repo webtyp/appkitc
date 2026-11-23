@@ -60,7 +60,7 @@ require (
 	webtyp.com/css v0.4.31 // indirect
 	webtyp.com/dbus v0.1.1 // indirect
 	webtyp.com/definitioncheck v0.0.3 // indirect
-	webtyp.com/dom v0.13.32 // indirect
+	webtyp.com/dom v0.13.34 // indirect
 	webtyp.com/erd v0.0.16 // indirect
 	webtyp.com/escape v0.1.0 // indirect
 	webtyp.com/fetch v0.1.33 // indirect
