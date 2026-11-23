@@ -9,7 +9,7 @@ require (
 	webtyp.com/command v0.0.4
 	webtyp.com/country v0.0.2
 	webtyp.com/ddl v0.0.59
-	webtyp.com/devtools v0.0.41
+	webtyp.com/devtools v0.0.51
 	webtyp.com/env v0.1.3
 	webtyp.com/events v0.1.15
 	webtyp.com/externalcalls v0.2.0
