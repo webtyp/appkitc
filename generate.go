@@ -95,7 +95,7 @@ func GenerateMain(rootDir, modulePath string, cfg server.MainConfig) (string, er
 		return "", fmt.Errorf("executing main template: %w", err)
 	}
 
-	if err := os.WriteFile(absPath, buf.Bytes(), filePerm); err != nil {
+	if err := writeIfChanged(absPath, buf.Bytes()); err != nil {
 		return "", fmt.Errorf("writing generated main file: %w", err)
 	}
 
@@ -167,7 +167,17 @@ func writeGenerated(path, tmplText string, data any) error {
 	if err := os.MkdirAll(filepath.Dir(path), dirPerm); err != nil {
 		return fmt.Errorf("creating directory: %w", err)
 	}
-	return os.WriteFile(path, buf.Bytes(), filePerm)
+	return writeIfChanged(path, buf.Bytes())
+}
+
+// writeIfChanged writes content to path only when the file holds something
+// else: webtyp dev generates on every start while its watcher is listening, and
+// rewriting identical bytes is a WRITE event that restarts the server for nothing.
+func writeIfChanged(path string, content []byte) error {
+	if current, err := os.ReadFile(path); err == nil && bytes.Equal(current, content) {
+		return nil
+	}
+	return os.WriteFile(path, content, filePerm)
 }
 
 // writeOnce writes text to path only when no file is there: config/removed.go holds the developer's answers

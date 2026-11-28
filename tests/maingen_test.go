@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 	"webtyp.com/command"
 
 	"webtyp.com/appkitc"
@@ -358,6 +359,28 @@ var App = appkit.App{
 	}
 	if _, err := os.Stat(filepath.Join(root, server.GeneratedMigrateDir, "migrations.go")); !os.IsNotExist(err) {
 		t.Errorf("migrate/migrations.go must NOT exist")
+	}
+
+	// A second run with nothing changed must not touch any file: webtyp dev
+	// generates on every start after its watcher is listening, and each write
+	// of web/server/main.go is a WRITE event that restarts the server.
+	old := time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)
+	for _, f := range files {
+		if err := os.Chtimes(filepath.Join(root, f.name), old, old); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if _, err := appkitc.GenerateMain(root, modulePath, server.MainConfig{Port: "8080"}); err != nil {
+		t.Fatal(err)
+	}
+	for _, f := range files {
+		info, err := os.Stat(filepath.Join(root, f.name))
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !info.ModTime().Equal(old) {
+			t.Errorf("%s was rewritten with identical content; an unchanged generation must not write", f.name)
+		}
 	}
 }
 
