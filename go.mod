@@ -13,12 +13,12 @@ require (
 	webtyp.com/env v0.1.3
 	webtyp.com/events v0.1.15
 	webtyp.com/externalcalls v0.2.0
-	webtyp.com/fmt v1.0.3
+	webtyp.com/fmt v1.0.4
 	webtyp.com/layout v0.3.139
 	webtyp.com/mcp v0.3.36
 	webtyp.com/migrate v0.1.9
 	webtyp.com/model v0.2.27
-	webtyp.com/router v0.5.9
+	webtyp.com/router v0.5.10
 	webtyp.com/rpc v0.2.30
 	webtyp.com/server v0.2.141
 	webtyp.com/sqlite v0.3.35
